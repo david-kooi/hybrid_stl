@@ -83,11 +83,14 @@ A \textit{hybrid time instance} is given by
 \end{center}
 \end{definition}
 
-\begin{definition}[Compact Hybrid Domain] A set $E \subset \mathbb{R}_{\geq0} \times \mathbb{N}$ is a  \textit{compact hybrid domain} if can be written as
-\begin{center}
-    $E = \bigcup\limits_{j=0}^{J-1} ([t_j,t_{j+1}] \times \{j\}$
-\end{center}
-For a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$.
+\begin{definition}[Compact Hybrid Domain] A set $E \subset
+    \mathbb{R}_{\geq0} \times \mathbb{N}$ is a  \textit{compact hybrid
+    domain} if it can be written as
+\begin{equation}
+    \label{eq:compact_htd}
+    E = \bigcup\limits_{j=0}^{J-1} ([t_j,t_{j+1}] \times \{j\}
+\end{equation}
+for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$.
 \end{definition}
 
 \begin{definition}[Hybrid Domain]
@@ -95,46 +98,53 @@ A set $E \subset \mathbb{R}_{\geq0} \times \mathbb{N}$ is a \textit{hybrid  doma
 \begin{center}
     $E \cap ([0,T] \times \{0,1,...,J\}$
 \end{center} 
-can be written as a compact hybrid time domain.
+is a compact hybrid time domain.
 \end{definition}
 
-\begin{definition}[Compact Hybrid Shift] Given a compact hybrid domain, $E$, a {compact hybrid shift} is denoted by a ordinary time shift $t^*$ and a discrete time shift $j^*$ as
-\begin{align}
-    (t^*,j^*) + E &= \bigcup\limits_{j=0}^{J-1} ([t_j + t^*,t_{j+1}+t^*] \times \{j+j^*\}\quad \mathrm{or}\\
-    E - (t^*,j^*) &= \bigcup\limits_{j=0}^{J-1} ([t_j - t^*,t_{j+1}-t^*] \times \{j-j^*\}\\
-\end{align}
-For a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$.
-\end{definition}
-
-\begin{definition}[Compact hybrid Interval]
-A \textit{compact hybrid interval} is defined by two hybrid time instances, $(t^*_A,j^*_A)$ and $(t^*_B,j^*_B)$, on original hybrid domain $E$, over the range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by
-
-\begin{gather}
-    \mathcal{I} := (t^*_A,j^*_A) + E'
-\end{gather}
-With
-\begin{gather}
-        E' := (E - (t^*_A,j^*_A)) \cap L = \bigcup\limits_{j=0}^{j^*_B} ([t_j - t^*_A, t_{j+1} - t^*_A] \times \{j-j^*_A\}) \cap L
-\end{gather}
-Where $L$ captures the lower and upper bounds of the shifted interval. 
+\begin{definition}[Compact Hybrid Shift] Given a compact hybrid domain $E$
+    and $(t^*,j^*)$, the forward {compact hybrid shift} of $E$ by $(t^*,j^*)$ is
 \begin{equation}
-        L  &:= [0,t^*_B - t^*_A]\times \{0,...,j^*_B-j*_A\}
+    (t^*,j^*) + E = \bigcup\limits_{j=0}^{J-1} ([t_j + t^*,t_{j+1}+t^*] \times \{j+j^*\}\quad\\
 \end{equation}
+and the backward hybrid shift of $E$ by $(t^*,j^*)$ is
+\begin{equation}
+    E - (t^*,j^*) = \bigcup\limits_{j=0}^{J-1} ([t_j - t^*,t_{j+1}-t^*] \times \{j-j^*\}\\
+\end{equation}
+for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$
+and E satisfying (\ref{eq:compact_htd}).
+\end{definition}
 
-For a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_{j^*_B}$. 
+\begin{definition}[Compact hybrid Interval] A \textit{compact hybrid
+    interval} is defined by two hybrid time instances $(t^*_A,j^*_A)$ and
+    $(t^*_B,j^*_B)$, where $t^*_A + j^*_A \leq t^*_B + j^*_B$, and an hybrid domain $E$, over the range $[t^*_A,
+    t^*_B]\times\{j^*_A,..., j^*_B\}$, by
+
+\begin{gather}
+    \mathcal{I} := (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J-1} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
+\end{gather}
+
+Where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_J = t^*_B - t^*_A$
 \end{definition}
 
 \begin{definition}[Open Hybrid Interval]
-An open hybrid interval is defined by two hybrid time instances, $(t^*_A,j^*_A)$ and $(t^*_B,j^*_B)$, on original hybrid domain $E$, over the range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by
+An open hybrid interval is defined by two hybrid time instances,
+$(t^*_A,j^*_A)$ and $(t^*_B,j^*_B)$, on hybrid domain $E$, over the
+range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
-\begin{gather}
-    \mathcal{I} := (t^*_A,j^*_A) + E'\\
-    E' := (E - (t^*_A,j^*_A)) \cap L
-\end{gather}
-With $L$ defined by the following cases
 \begin{enumerate}
-    \item Interval open on the left, $L := (0,t^*_B - t^*_A]\times \{0,...,j^*_B-j*_A$\}\\
-    \item Interval open on the right, $L := [0,t^*_B - t^*_A)\times \{0,...,j^*_B-j*_A\}$
+    \item Left open interval
+    \begin{gather}
+        \mathcal{I} := (t^*_A, t_1] \times \{j^*_A\} \cup
+        \bigcup\limits_{j=1}^{J-1} ([t_j+t^*_A,t_{j+1}+t^*_A] \times \{j+j^*_A\} 
+    \end{gather}
+    Where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_J = t^*_B - t^*_A$
+
+    \item Right open interval
+    \begin{equation}
+        \mathcal{I} :=  \bigcup\limits_{j=0}^{J-2} ([t_j+t^*_A,t_{j+1}+t^*_A] \times \{j+j^*_A\} 
+                         \cup [t_{J-1}, t^*_B) \times \{j^*_B\}
+    \end{equation}
+    Where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_J = t^*_B - t^*_A$
 \end{enumerate}
 
 \end{definition}
