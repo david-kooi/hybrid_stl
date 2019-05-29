@@ -88,9 +88,9 @@ A \textit{hybrid time instance} is given by
     domain} if it can be written as
 \begin{equation}
     \label{eq:compact_htd}
-    E = \bigcup\limits_{j=0}^{J-1} ([t_j,t_{j+1}] \times \{j\})
+    E = \bigcup\limits_{j=0}^{J} ([t_j,t_{j+1}] \times \{j\})
 \end{equation}
-for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$.
+for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1}$.
 \end{definition}
 
 \begin{definition}[Hybrid Domain]
@@ -104,13 +104,13 @@ is a compact hybrid time domain.
 \begin{definition}[Compact Hybrid Shift] Given a compact hybrid domain $E$
     and $(t^*,j^*)$, the forward {compact hybrid shift} of $E$ by $(t^*,j^*)$ is
 \begin{equation}
-    (t^*,j^*) + E = \bigcup\limits_{j=0}^{J-1} ([t_j + t^*,t_{j+1}+t^*] \times \{j+j^*\}\quad\\
+    (t^*,j^*) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*,t_{j+1}+t^*] \times \{j+j^*\}\quad\\
 \end{equation}
 and the backward hybrid shift of $E$ by $(t^*,j^*)$ is
 \begin{equation}
-    E - (t^*,j^*) = \bigcup\limits_{j=0}^{J-1} ([t_j - t^*,t_{j+1}-t^*] \times \{j-j^*\}\\
+    E - (t^*,j^*) = \bigcup\limits_{j=0}^{J} ([t_j - t^*,t_{j+1}-t^*] \times \{j-j^*\}\\
 \end{equation}
-for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_J$
+for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1}$
 and $E$ satisfying (\ref{eq:compact_htd}).
 \end{definition}
 
@@ -120,10 +120,10 @@ and $E$ satisfying (\ref{eq:compact_htd}).
     t^*_B]\times\{j^*_A,..., j^*_B\}$, by
 
 \begin{gather}
-    \mathcal{I} := (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J-1} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
+    \mathcal{I} := (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
 \end{gather}
 
-- where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_J =
+- where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1} =
 t^*_B - t^*_A$.
 \end{definition}
 
@@ -135,38 +135,45 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 \begin{enumerate}
 
     \item Left open interval
-    \begin{gather}
-        \mathcal{I} := \bigg( (t^*_A, t_1] \times \{j^*_A\} \bigg) \cup 
-        \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\} = 
-        \bigcup\limits_{j=0}^{J-1} ([t_j+t^*_A+t_1,t_{j+1}+t^*_A+t_1] \times \{j+j^*_A+1\} 
-    \end{gather}
-    - where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq
-    t_J = t^*_B - t^*_A - t_1$;
+    \begin{align}
+        \mathcal{I} :&= \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup 
+        \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\} \\
+        &= \bigg( (t^*_A, t_1 +
+        t^*_A] \times \{j^*_A\} \bigg) \cup 
+        \bigg\{ \bigcup\limits_{j=0}^{J}
+            ([t_j+t^*_A+t_1,t_{j+1}+t^*_A+t_1] \times \{j+j^*_A+1\}\bigg
+            \}\nonumber 
+    \end{align}
+    - where $J = j^*_B - j^*_A - 1$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq
+    t_{J+1} = t^*_B - t^*_A - t_1$;
 
     \item Right open interval
-    \begin{equation}
-        \mathcal{I} :=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
-        [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)= \bigcup\limits_{j=0}^{J-1} ([t_j+t^*_A,t_{j+1}+t^*_A] \times \{j+j^*_A\} 
+    \begin{align}
+        \mathcal{I} :&=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
+        [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)\\
+        &= \bigg\{ \bigcup\limits_{j=0}^{J} ([t_j+t^*_A,t_{j+1}+t^*_A]
+            \times \{j+j^*_A\}\bigg\} 
                          \cup \bigg(
-                            [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)
-    \end{equation}
+                            [t_{j^*_B}, t^*_B) \times
+                        \{j^*_B\}\bigg)\nonumber
+    \end{align}
     - where $J = j^*_B - j^*_A - 1$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ...
-    \leq t_J = t_{j^*_B} - t^*_A$, and $t_J \leq t_{j^*_B}$;
-;
+    \leq t_{J+1} = t_{j^*_B} - t^*_A$; 
+
 
     \item Open interval
      \begin{align}
-        \mathcal{I} :&=  \bigg( (t^*_A, t_1] \times \{j^*_A\} \bigg) \cup
+        \mathcal{I} :&=  \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
         \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\}
         \cup \bigg( [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg) \\
         &=  
-        \bigg( (t^*_A, t_1] \times \{j^*_A\} \bigg) \cup
-        \bigg\{ \bigcup\limits_{j=0}^{J-1} ([t_j+t^*_A+t_1,t_{j+1}+t^*_A] \times
+        \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
+        \bigg\{ \bigcup\limits_{j=0}^{J} ([t_j+t^*_A+t_1,t_{j+1}+t^*_A] \times
             \{j+j^*_A+1\} \bigg\}
-        \cup \bigg( [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)  
+        \cup \bigg( [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg) \nonumber 
      \end{align}
-    - where $J = j^*_B - j^*_A - 1$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ...
-    \leq t_J = t_{j^*_B} - t^*_A$, and $t_J \leq t_{j^*_B}$;
+    - where $J = j^*_B - j^*_A -2$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ...
+    \leq t_{J+1} = t_{j^*_B} - t^*_A$. 
 
 
 \end{enumerate}
