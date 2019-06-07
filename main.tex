@@ -69,9 +69,8 @@ are the positional coordinates of the intersection.
 
 \section{STL for Hybrid Systems}
 
-\subsection{Hybrid Time STL}
-\subsubsection{Hybrid System Solutions}
-Solutions to hybrid systems are defined on ordinary and discrete time:
+\subsection{Hybrid Time Domain Preliminaries }
+Solutions to a hybrid system $\mathcal{H}$ are defined on ordinary and discrete time:
 \begin{enumerate}
     \item Ordinary Time: $t\in\mathbb{R}_{\geq0} :=  [0,\infty)$
     \item Discrete Time: $j\in\mathbb{N} := \{0,1,2,...\}$
@@ -180,7 +179,33 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 \end{definition}
 
 
-    
+
+\subsection{Hybrid Time Solutions}
+A solution of $\mathcal{H}$ is a map $\phi:E \mapsto \mathbb{R^n}$ where
+$\phi$ is a hybrid arc and satisfies hybrid basic conditions of
+\cite{hybrid_2012}.
+
+\subsection{STL Definitions} 
+
+Recall the state of a hybrid system is $x\in \mathbb{R}^n$.
+
+\begin{definition}{(Atomic Proposition)}
+
+An atomic proposition $p^{\mu}$ is a function that maps the domain of
+the system to a boolean value. 
+\begin{equation}
+    p^{\mu}\;:\; \mathcal{Z}\times\mathcal{U}\mapsto \{0,1\}
+\end{equation}
+\end{definition}
+
+$\mu:\mathcal{Z}\times\mathcal{U}\mapsto\mathbb{R}$ represents a robustness measure of the proposition such that:
+Where,
+\begin{center}
+    $\mu > 0 \implies p^{\mu} = 1$\\
+    $\mu \leq 0 \implies p^{\mu} = 0$
+\end{center}
+
+
 
 
 
