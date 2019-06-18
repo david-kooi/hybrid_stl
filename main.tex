@@ -14,6 +14,7 @@
 \usepackage{comment}
 \usepackage{ragged2e}
 \usepackage[margin=0.5in]{geometry}
+\usepackage{enumitem}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
@@ -69,7 +70,25 @@ are the positional coordinates of the intersection.
 
 \section{STL for Hybrid Systems}
 
-\subsection{Hybrid Time Domain Preliminaries }
+\subsection{Hybrid Systems Preliminaries }
+
+\begin{definition}[Hybrid System]
+    A hybrid system $\mathcal{H} = (C,F,D,G)$ is defined by a flow set $C$, flow map
+    $F$, jump set $D$, and jump map $G$, following \cite{hybrid_2012}. $x\in
+    \mathcal{X}$ is the system's state where $\mathcal{X}\subset\mathbb{R}^n$ is the state
+    space. Continuous dynamics are defined on flow set $C$ and are captured by the set valued map
+    $F:\mathcal{X}\rightrightarrows\mathcal{X}$. Discrete dynamics are
+    defined on jump set $D$ and are captured by by the set-valued map
+    $G:\mathcal{X}\rightrightarrows\mathcal{X}$. Taken together,
+    $\mathcal{H}$ can be written as:
+
+    \begin{alignat}{2}
+        &\dot{x} &&\in F(x) \quad\quad x \in C\\
+        &x^{+} &&\in F(x) \quad\quad x \in D \nonumber
+    \end{alignat}
+
+\end{definition}
+
 Solutions to a hybrid system $\mathcal{H}$ are defined on ordinary and discrete time:
 \begin{enumerate}
     \item Ordinary Time: $t\in\mathbb{R}_{\geq0} :=  [0,\infty)$
@@ -87,7 +106,7 @@ A \textit{hybrid time instance} is given by
     domain} if it can be written as
 \begin{equation}
     \label{eq:compact_htd}
-    E = \bigcup\limits_{j=0}^{J} ([t_j,t_{j+1}] \times \{j\})
+    E := \bigcup\limits_{j=0}^{J} ([t_j,t_{j+1}] \times \{j\})
 \end{equation}
 for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1}$.
 \end{definition}
@@ -119,7 +138,7 @@ and $E$ satisfying (\ref{eq:compact_htd}).
     t^*_B]\times\{j^*_A,..., j^*_B\}$, by
 
 \begin{gather}
-    \mathcal{I} := (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
+    \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:= (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
 \end{gather}
 
 - where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1} =
@@ -135,7 +154,7 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
     \item Left open interval
     \begin{align}
-        \mathcal{I} :&= \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup 
+        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:&= \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup 
         \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\} \\
         &= \bigg( (t^*_A, t_1 +
         t^*_A] \times \{j^*_A\} \bigg) \cup 
@@ -148,7 +167,7 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
     \item Right open interval
     \begin{align}
-        \mathcal{I} :&=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
+        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:&=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
         [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)\\
         &= \bigg\{ \bigcup\limits_{j=0}^{J} ([t_j+t^*_A,t_{j+1}+t^*_A]
             \times \{j+j^*_A\}\bigg\} 
@@ -162,7 +181,7 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
     \item Open interval
      \begin{align}
-        \mathcal{I} :&=  \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
+        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*} :&=  \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
         \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\}
         \cup \bigg( [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg) \\
         &=  
@@ -178,40 +197,110 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 \end{enumerate}
 \end{definition}
 
+\begin{definition}[Hybrid Arc]
 
+    A function $\phi: E\mapsto \mathcal{X}$ is a \textit{hybrid arc} if
+    $E$ is a hybrid time domain and for each $j\in\mathbb{N}$, the function
+    $t\mapsto\phi(t,j)$ is absolutely continuous on the interval $I_j :=
+    \{t:(t,j)\in E\}$. The interior of $I_j$ is denoted int $I_j$.
+\end{definition}
 
-\subsection{Hybrid Time Solutions}
-A solution of $\mathcal{H}$ is a map $\phi:E \mapsto \mathbb{R^n}$ where
-$\phi$ is a hybrid arc and satisfies hybrid basic conditions of
-\cite{hybrid_2012}.
+\begin{definition}[Solution of a Hybrid System]
+    A hybrid arc $\phi$ is a solution to hybrid system $\mathcal{H}=(C,F,D,G)$ if
+    \begin{enumerate}
+        \item $\phi(0,0) \in C\cup D$
+        \item for all $j \in \mathbb{N}$ such that $I^j$ has a nonempty
+           interior 
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $\phi(t,j) \in C$ for all $t \in
+                    \mathrm{int}\;I^j$
+                \item $\dot{\phi}(t,j)\in F(\phi(t,j))$ for almost
+                    all $t \in I^k$
+            \end{itemize}
+        \item for all $(t,j)\in E $ such that $(t,j+1)\in E$  
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $\phi(t,j) \in D$
+                \item $\phi(t,j+1) \in G(\phi(t,j))$
+            \end{itemize}
+    \end{enumerate}
+\end{definition}
+
+%A solution of a hybrid system $\mathcal{H}$ is a map $\phi:dom \phi  \mapsto
+%\mathbb{R}^n$ where $dom \phi$ is a hybrid time domain.  
+%$\phi$ is called a hybrid arc and satisfies hybrid basic conditions of
+%\cite{hybrid_2012}.
+
 
 \subsection{STL Definitions} 
 
-Recall the state of a hybrid system is $x\in \mathbb{R}^n$.
+%Recall the state of a hybrid system is $x\in \mathbb{R}^n$.
+
 
 \begin{definition}{(Atomic Proposition)}
 
-An atomic proposition $p^{\mu}$ is a function that maps the domain of
-the system to a boolean value. 
-\begin{equation}
-    p^{\mu}\;:\; \mathcal{Z}\times\mathcal{U}\mapsto \{0,1\}
-\end{equation}
-\end{definition}
+An atomic proposition $p^{\mu}: \mathcal{X}\mapsto \mathbb{B}$ is a function that maps the state space of
+the system to a boolean value. The set of all atomic propositions is denoted
+by $\mathcal{P}$.
 
-$\mu:\mathcal{Z}\times\mathcal{U}\mapsto\mathbb{R}$ represents a robustness measure of the proposition such that:
-Where,
+
+The function $\mu:\mathcal{X}\mapsto\mathbb{R}$ represents a robustness measure of the
+proposition and has following relation to an atomic proposition.
+
 \begin{center}
     $\mu > 0 \implies p^{\mu} = 1$\\
     $\mu \leq 0 \implies p^{\mu} = 0$
 \end{center}
 
+\end{definition}
+
+\begin{definition}[STL Grammar]
+STL formulas are defined recursively by the following grammar:
+
+\begin{center}
+    $\varphi ::= p^\mu\;|\;\neg\varphi\;|\varphi_1 \land
+    \varphi_2\;|\;\lozenge_{\mathcal{I}}\;\varphi\;|\;\varphi_1\;\mathcal{U}_{\mathcal{I}}\;\varphi_2$
+\end{center}
+
+Where $\mathcal{I}$ is a open or closed hybrid interval and $\varphi$,
+$\varphi_1$,$\varphi_2$ are STL formula.   
+\end{definition}
+
+The fact that a hybrid arc satisfies STL formula $\varphi$ at hybrid time instance
+(t,j) is given by $\varphi(\phi(t,j)) = 1$. When a hybrid arc does not satisfy
+a proposition then $\varphi(\phi(t,j)) = 0$.
 
 
+The validity of a formula $\varphi$ with respect to hybrid arc $\phi$ at
+at time (t,j) is defined inductively as
 
+\begin{alignat*}{3}
+   (\phi, (t,j)) &\models p^\mu &&\iff \mu(\phi(t,j)) > 0\\ 
+   (\phi, (t,j)) &\models \varphi &&\iff \varphi(\phi(t,j)) = 1\\
+   (\phi, (t,j)) &\models \neg\varphi &&\iff \neg((\phi,(t,j))\models\varphi)\\
+   (\phi, (t,j)) &\models \varphi \land \psi &&\iff (\phi,(t,j)) 
+               \models \varphi \land (\phi,(t,j))\models \psi\\
+   (\phi, (t,j)) &\models \lozenge_{\mathcal{I}^{t_b,j_b}_{t_a,j_a}}\;\varphi &&\iff
+   \exists(t',j')\in (t,j) + \mathcal{I}^{t_b,j_b}_{t_a,j_a}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
+       \varphi\\
+   (\phi, (t,j)) &\models \psi\;\mathcal{U}_{\mathcal{I}^{t_b,j_b}_{t_a,j_a}}\;\varphi &&\iff 
+       \exists (t',j')\in (t,j) +
+       \mathcal{I}^{t_b,j_b}_{t_a,j_a}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
+       \varphi\;\;\land\;\;\forall(t'',j'')\in\mathcal{I}^{t',j'}_{t\;,j},\;\;(\phi,(t'',j''))\models \psi 
+\end{alignat*}
 
 
 
 \clearpage
+
+The true and false conditions
+will be denoted by
+\begin{align*}
+  \phi(t,j) \Vdash p^\mu &\implies p^\mu(\phi(t,j)) = 1\\
+  \phi(t,j) \nVdash p^\mu &\implies p^\mu(\phi(t,j)) = 0\\
+\end{align*}
+
+
+
 \begin{flushleft}
 \textbf{Remark:}
 Authors of \cite{hutchison_robust_2010} denote a ordinary time interval $\mathcal{I}$, relative to ordinary time $t$ as: 
