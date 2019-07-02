@@ -34,6 +34,11 @@ M.~Chen, Q.~Tam, S.~C. Livingston, and M.~Pavone, ``Signal {Temporal} {Logic}
   meets {Hamilton}-{Jacobi} {Reachability}: {Connections} and {Applications},''
   2018.
 
+\bibitem{hybrid_2012}
+R.~Goebel, R.~G. Sanfelice, and A.~R. Teel, \emph{Hybrid Dynamical Systems:
+  Modeling, Stability, and Robustness}.\hskip 1em plus 0.5em minus 0.4em\relax
+  New Jersey: Princeton University Press, 2012.
+
 \bibitem{hutchison_robust_2010}
 A.~Donzé and O.~Maler, ``Robust {Satisfaction} of {Temporal} {Logic} over
   {Real}-{Valued} {Signals}.''\hskip 1em plus 0.5em minus 0.4em\relax Berlin,

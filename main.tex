@@ -22,6 +22,7 @@
 
 \maketitle
 
+\begin{comment}
 \section{Autonomous Vehicles}
 \subsection{Intersection Management}
 
@@ -68,6 +69,7 @@ are the positional coordinates of the intersection.
 \end{figure}
 
 
+\end{comment}
 \section{STL for Hybrid Systems}
 
 \subsection{Hybrid Systems Preliminaries }
@@ -132,13 +134,17 @@ for a finite sequence of times $0 = t_0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1}$
 and $E$ satisfying (\ref{eq:compact_htd}).
 \end{definition}
 
-\begin{definition}[Compact Hybrid Interval] A \textit{compact hybrid
-    interval} is defined by two hybrid time instances $(t^*_A,j^*_A)$ and
-    $(t^*_B,j^*_B)$, where $t^*_A + j^*_A \leq t^*_B + j^*_B$, and an hybrid domain $E$, over the range $[t^*_A,
-    t^*_B]\times\{j^*_A,..., j^*_B\}$, by
+\begin{definition}[Hybrid Interval] A \textit{hybrid interval} is defined by
+    two hybrid time instances $(t^*_A,j^*_A)$ and $(t^*_B,j^*_B)$, where
+    $t^*_A + j^*_A \leq t^*_B + j^*_B$, and an hybrid domain $E$, over the
+    range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$.
+\end{definition}
+
+\begin{definition}[Compact Hybrid Interval] A hybrid interval is a \textit{compact hybrid
+    interval} if it has the form
 
 \begin{gather}
-    \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:= (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
+    \mathcal{I}:= (t^*_A,j^*_A) + E = \bigcup\limits_{j=0}^{J} ([t_j + t^*_A,t_{j+1} + t^*_A] \times \{j + j^*_A\}
 \end{gather}
 
 - where $J = j^*_B - j^*_A$ and $t_0 = 0 \leq t_1 \leq t_2 \leq ... \leq t_{J+1} =
@@ -146,15 +152,14 @@ t^*_B - t^*_A$.
 \end{definition}
 
 \begin{definition}[Open Hybrid Interval]
-An open hybrid interval is defined by two hybrid time instances,
-$(t^*_A,j^*_A)$ and $(t^*_B,j^*_B)$, on hybrid domain $E$, over the
-range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
+    A hybrid time interval is an \textit{open hybrid interval} if it has the form of the
+following cases:
 
 \begin{enumerate}
 
     \item Left open interval
     \begin{align}
-        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:&= \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup 
+        \mathcal{I}:&= \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup 
         \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\} \\
         &= \bigg( (t^*_A, t_1 +
         t^*_A] \times \{j^*_A\} \bigg) \cup 
@@ -167,7 +172,7 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
     \item Right open interval
     \begin{align}
-        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*}:&=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
+        \mathcal{I}:&=  \bigg\{(t^*_A,j^*_A) + E\bigg\} \cup \bigg(
         [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg)\\
         &= \bigg\{ \bigcup\limits_{j=0}^{J} ([t_j+t^*_A,t_{j+1}+t^*_A]
             \times \{j+j^*_A\}\bigg\} 
@@ -181,7 +186,7 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
 
     \item Open interval
      \begin{align}
-        \mathcal{I}^{t_B^*,j_B^*}_{t_A^*,j_A^*} :&=  \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
+        \mathcal{I} :&=  \bigg( (t^*_A, t_1 + t^*_A] \times \{j^*_A\} \bigg) \cup
         \bigg\{ (t^*_A + t_1,j^*_A + 1) + E\bigg\}
         \cup \bigg( [t_{j^*_B}, t^*_B) \times \{j^*_B\}\bigg) \\
         &=  
@@ -202,22 +207,22 @@ range $[t^*_A, t^*_B]\times\{j^*_A,..., j^*_B\}$, by the following cases:
     A function $\phi: E\mapsto \mathcal{X}$ is a \textit{hybrid arc} if
     $E$ is a hybrid time domain and for each $j\in\mathbb{N}$, the function
     $t\mapsto\phi(t,j)$ is absolutely continuous on the interval $I_j :=
-    \{t:(t,j)\in E\}$. The interior of $I_j$ is denoted int $I_j$.
+    \{t:(t,j)\in E\}$. The interior of $I^j$ is denoted int $I^j$.
 \end{definition}
 
 \begin{definition}[Solution of a Hybrid System]
     A hybrid arc $\phi$ is a solution to hybrid system $\mathcal{H}=(C,F,D,G)$ if
     \begin{enumerate}
-        \item $\phi(0,0) \in C\cup D$
+        \item $\phi(0,0) \in \overline{C}\cup D$
         \item for all $j \in \mathbb{N}$ such that $I^j$ has a nonempty
            interior 
             \begin{itemize}[noitemsep,nolistsep]
                 \item $\phi(t,j) \in C$ for all $t \in
                     \mathrm{int}\;I^j$
                 \item $\dot{\phi}(t,j)\in F(\phi(t,j))$ for almost
-                    all $t \in I^k$
+                    all $t \in I^j$
             \end{itemize}
-        \item for all $(t,j)\in E $ such that $(t,j+1)\in E$  
+        \item for all $(t,j)\in \text{dom}\;\phi $ such that $(t,j+1)\in \text{dom}\;\phi$  
             \begin{itemize}[noitemsep,nolistsep]
                 \item $\phi(t,j) \in D$
                 \item $\phi(t,j+1) \in G(\phi(t,j))$
@@ -247,8 +252,8 @@ The function $\mu:\mathcal{X}\mapsto\mathbb{R}$ represents a robustness measure 
 proposition and has following relation to an atomic proposition.
 
 \begin{center}
-    $\mu > 0 \implies p^{\mu} = 1$\\
-    $\mu \leq 0 \implies p^{\mu} = 0$
+    $\mu > 0 \Leftrightarrow p^{\mu} = 1$\\
+    $\mu \leq 0 \Leftrightarrow p^{\mu} = 0$
 \end{center}
 
 \end{definition}
@@ -262,7 +267,7 @@ STL formulas are defined recursively by the following grammar:
 \end{center}
 
 Where $\mathcal{I}$ is a open or closed hybrid interval and $\varphi$,
-$\varphi_1$,$\varphi_2$ are STL formula.   
+$\varphi_1$,$\varphi_2$ are STL formulae.   
 \end{definition}
 
 The fact that a hybrid arc satisfies STL formula $\varphi$ at hybrid time instance
@@ -279,43 +284,21 @@ at time (t,j) is defined inductively as
    (\phi, (t,j)) &\models \neg\varphi &&\iff \neg((\phi,(t,j))\models\varphi)\\
    (\phi, (t,j)) &\models \varphi \land \psi &&\iff (\phi,(t,j)) 
                \models \varphi \land (\phi,(t,j))\models \psi\\
-   (\phi, (t,j)) &\models \lozenge_{\mathcal{I}^{t_b,j_b}_{t_a,j_a}}\;\varphi &&\iff
-   \exists(t',j')\in (t,j) + \mathcal{I}^{t_b,j_b}_{t_a,j_a}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
+   (\phi, (t,j)) &\models \lozenge_{\mathcal{I}}\;\varphi &&\iff
+   \exists(t',j')\in (t,j) + \mathcal{I}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
        \varphi\\
-   (\phi, (t,j)) &\models \psi\;\mathcal{U}_{\mathcal{I}^{t_b,j_b}_{t_a,j_a}}\;\varphi &&\iff 
+   (\phi, (t,j)) &\models \psi\;\mathcal{U}_{\mathcal{I}}\;\varphi &&\iff 
        \exists (t',j')\in (t,j) +
-       \mathcal{I}^{t_b,j_b}_{t_a,j_a}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
-       \varphi\;\;\land\;\;\forall(t'',j'')\in\mathcal{I}^{t',j'}_{t\;,j},\;\;(\phi,(t'',j''))\models \psi 
+       \mathcal{I}\;\;\mathrm{s.t}\;\;(\phi,(t',j'))\models
+       \varphi\;\;\land\;\;\forall(t'',j'')\in\left((t,j) +
+       \mathcal{I}\right)\cap([t,t']\times[j,\dots,j']),\;\;(\phi,(t'',j''))\models \psi 
 \end{alignat*}
 
 
 
 \clearpage
 
-The true and false conditions
-will be denoted by
-\begin{align*}
-  \phi(t,j) \Vdash p^\mu &\implies p^\mu(\phi(t,j)) = 1\\
-  \phi(t,j) \nVdash p^\mu &\implies p^\mu(\phi(t,j)) = 0\\
-\end{align*}
-
-
-
-\begin{flushleft}
-\textbf{Remark:}
-Authors of \cite{hutchison_robust_2010} denote a ordinary time interval $\mathcal{I}$, relative to ordinary time $t$ as: 
-\end{flushleft}
-
-\begin{center}
-$t + \mathcal{I} := \{t+t': t' \in \mathcal{I}\}$ 
-\end{center}
-The same notation can be used denoting a hybrid temporal interval, $\mathcal{I}$ relative to hybrid time instance $(t,j)$:
-\begin{center}
-    $(t,j) + I := \{(t+t',j+j'): (t',j') \in I\}$
-\end{center}
-
-
-\clearpage
+\begin{comment}
 \subsection{Continuous Time STL}
 A STL formula $\phi$ is defined recursively as:
 \begin{equation}
@@ -361,55 +344,9 @@ Let $E = [0, 10] \times {0}$ be a compact hybrid time domain. Let the upper and 
 \end{flushleft}
 \end{comment}
 
-
-\clearpage
-
-
-\subsubsection{Possible Notion of Hybrid STL}
-\begin{center}
-    Recursive STL Definition
-\end{center}
-\begin{equation}
-    \psi ::= p^\mu\;|\;\lnot \psi\;|\;\psi_1 \land \psi_2\;|\;\lozenge_{I} \psi\;|\;\psi_1 U_{I} \psi_2
-\end{equation}
-Where $\psi_1$, $\psi_2$ are STL formula and $I$ is a hybrid time interval.
-
-\begin{center}
-    Inductive STL Definition
-\end{center}
-\begin{alignat*}{3}
-            &\phi \models \psi &&\Leftrightarrow (\phi, (t,j)) \models p \\
-            &(\phi, (t,j) \models p^\mu \quad &&\Leftrightarrow \mu(\phi(t))
-> 0\\
-            &((\phi,(t,j)) \models \square_{I} \psi &&\Leftrightarrow \forall (t',j') \in (t,j)+I\;s.t.\;(\phi, (t',j')) \models \psi
-\end{alignat*}
-
+\appendix
 
 \begin{comment}
-\begin{equation}
-            ((\phi,(t,j)) \models \square_{I} \psi \Leftrightarrow \forall (t+t',j+j') \in I' ,(t+t',j+j') \in dom\phi\;s.t\;(\phi, (t+t',j+j')) \models \psi\;,\; I' = [t + t_a, t + t_b] \times [j + j_a, j + j_b]
-\end{equation}
-\end{comment}
-
-
-
-
-
-\subsubsection{Previous Notions of Hybrid STL}
-From Atreya - Modeling Hybrid Systems using Signal Temporal Logic
-\begin{center}
-    Inductive STL Definition
-\end{center}
-
-\begin{equation}
-            ((\phi,(t,j)) \models \square_{(t,j)} \psi \Leftrightarrow \forall (t',j') \in dom\;\phi, t'+j' > t + j\;s.t\;(\phi, (t',j')) \models \psi
-\end{equation}
-
-
-
-
-\clearpage
-\appendix
 \subsection{Lane Changing}
 The authors of \cite{chen_signal_nodate} use STL and Hamilton Jacobi reachability to combine temporal specification with quantification of a reachable set: STL temporal specifications are related to reachability operators.
 
@@ -461,11 +398,9 @@ Where $\phi_1$, $\phi_2$ are STL formula and $I$ is an interval on $dom\;\phi$.
             &(\sigma, k) \models p^\mu \quad &&\Leftrightarrow \mu(x_k, \gamma_k) > 0\\
             &(\sigma, k) \models \square_{[n,m]} \psi &&\Leftrightarrow \forall k' \in [k' + n, k' + m]\;s.t\;(\sigma, k') \models \psi
 \end{alignat*}
-
-
-
+\end{comment}
 
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
-
 \end{document}
+
